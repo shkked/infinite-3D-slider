@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<div class="flex items-center">
-			<cardItem v-for="value in data" :item="value" :key="value.id" />
+		<div class="flex items-center justify-center mt-16">
+			<cardItem v-for="value in dataCard" :item="value" :key="value.id" />
 		</div>
 	</div>
 </template>
@@ -11,7 +11,7 @@ import type { ICardItem } from "~/types/card.ts"
 
 import { ref } from "vue"
 
-const data: ICardItem[] = ref([
+const dataCard = ref<ICardItem[]>([
 	{
 		id: 1,
 		name: "Василий Вакуленко",
