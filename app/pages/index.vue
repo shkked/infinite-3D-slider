@@ -1,8 +1,6 @@
 <template>
 	<div>
-		<div class="flex items-center justify-center mt-16">
-			<cardItem v-for="value in dataCard" :item="value" :key="value.id" />
-		</div>
+		<carouselBloger :dataCard="dataCard" />
 	</div>
 </template>
 
@@ -37,11 +35,35 @@ const dataCard = ref<ICardItem[]>([
 		},
 	},
 	{
-		id: 2,
+		id: 3,
 		name: "Михаил Смирнов",
 		nickname: "@marteen",
 		quote: "Просто мартин",
 		imageURL: "martin.png",
+		links: {
+			vk: "https://vk.com/marteen",
+			telegram: "https://t.me/semechkiotmartina",
+			rutube: "https://rutube.ru/channel/marteen/",
+		},
+	},
+	{
+		id: 4,
+		name: "Станислав Михайлов",
+		nickname: "Стас Михайлов",
+		quote: "Ты прости меня, родная, Что творю я — сам не знаю",
+		imageURL: "stas_mihaylov.png",
+		links: {
+			vk: "https://vk.com/stasmihaylov",
+			telegram: "https://t.me/stasmihaylovofficial",
+			rutube: "https://rutube.ru/channel/stasmihaylov/",
+		},
+	},
+	{
+		id: 5,
+		name: "Евгений Трофимов",
+		nickname: "Женя Трофимов",
+		quote: "Просто мартин",
+		imageURL: "trofimov.png",
 		links: {
 			vk: "https://vk.com/marteen",
 			telegram: "https://t.me/semechkiotmartina",
