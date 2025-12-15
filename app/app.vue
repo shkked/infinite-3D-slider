@@ -1,11 +1,11 @@
 <template>
-	<NuxtLayout>
-		<NuxtPage />
-	</NuxtLayout>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <style>
 body {
-	background-color: rgba(22, 22, 22, 1);
+  background-color: rgba(22, 22, 22, 1);
 }
 </style>
