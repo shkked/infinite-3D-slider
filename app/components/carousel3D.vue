@@ -9,6 +9,7 @@
       @touchstart="carouselStore.handleDragStart"
       @touchmove="carouselStore.handleDragMove"
       @touchend="carouselStore.isDragging = false"
+      @wheel="carouselStore.handleWheel"
     >
       <carouselItem
         v-for="(carouselItem, indexCarouselItem) in dataCarousel"
@@ -28,5 +29,3 @@ defineProps<ICarousel>();
 
 const carouselStore = useCarouselStore();
 </script>
-
-<style scoped></style>

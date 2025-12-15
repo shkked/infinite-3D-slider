@@ -1,31 +1,35 @@
 <template>
   <div
-    class="cardWrapper absolute rounded-[40px] top-0 w-[550px] h-[727px] transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] cursor-pointer active:cursor-pointer overflow-hidden pointer-events-none select-none"
+    class="cardWrapper absolute rounded-[40px] top-0 w-[240px] h-[650px] sm:w-[450px] sm:h-[600px] lg:w-[550px] lg:h-[727px] transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] cursor-pointer active:cursor-pointer overflow-hidden pointer-events-none select-none"
+    :class="{
+      'bg-gradient-to-r from-transparent via-[rgba(0,246,255,1)]/40 to-[rgba(109,233,37,1)]/80':
+        !isCardActive(indexCarouselItem),
+    }"
     :style="getCardStyle(indexCarouselItem)"
     @click="handleCardClick(indexCarouselItem)"
   >
     <!-- Свечение для активной карточки -->
     <div
-      v-if="getCardStyle(indexCarouselItem).opacity == 1"
+      v-if="isCardActive(indexCarouselItem)"
       class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_-20%_60%,rgba(255,0,128,1),transparent_55%),radial-gradient(circle_at_130%_60%,rgba(233,200,37,1),transparent_55%),linear-gradient(135deg,#0c2545,#0e3a66)] rounded-[40px]"
     />
 
     <div class="cardItem relative flex flex-col h-full">
-      <div class="flex items-center justify-between mt-10 mx-10">
+      <div class="flex sm:flex-row items-center justify-between mt-4 sm:mt-10 mx-4 sm:mx-10">
         <div
-          class="badge rounded-full w-14 h-14 flex items-center justify-center border border-[rgb(255, 255, 255, 0.05)] text-2xl"
+          class="badge backdrop-blur-sm rounded-full w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center border border-[rgb(255, 255, 255, 0.05)] text-xl sm:text-2xl"
         >
           🎤
         </div>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1 sm:gap-3">
           <a :href="carouselItem.links.vk" target="_blank">
-            <img class="w-11 h-11" src="/socials/vk.png" alt="vk" />
+            <img class="w-8 h-8 sm:w-11 sm:h-11" src="/socials/vk.png" alt="vk" />
           </a>
           <a :href="carouselItem.links.telegram" target="_blank">
-            <img class="w-11 h-11" src="/socials/telegram.png" alt="telegram" />
+            <img class="w-8 h-8 sm:w-11 sm:h-11" src="/socials/telegram.png" alt="telegram" />
           </a>
           <a :href="carouselItem.links.rutube" target="_blank">
-            <img class="w-11 h-11" src="/socials/rutube.png" alt="rutube" />
+            <img class="w-8 h-8 sm:w-11 sm:h-11" src="/socials/rutube.png" alt="rutube" />
           </a>
         </div>
       </div>
@@ -39,15 +43,20 @@
         <div
           class="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-[rgb(46,96,164)] via-[rgba(46,96,164,0.9)] to-transparent pointer-events-none z-0"
         />
-        <div class="px-8 py-6 z-10">
-          <p class="text-gray-400">Имя блогера</p>
-          <h3 class="font-bold text-4xl">{{ carouselItem.name }}</h3>
-          <p class="text-gray-400 mt-4">Никнейм в соцсетях</p>
-          <p class="text-[18px]">{{ carouselItem.nickname }}</p>
-          <p class="text-gray-400 mt-4">Цитата ©</p>
-          <p class="text-[18px] italic">«{{ carouselItem.quote }}»</p>
+        <div class="px-4 sm:px-8 py-6 z-10">
+          <!-- {{ indexCarouselItem }}
+          <br />
+          {{ indexCarouselItem - currentIndex }} -->
+          <p class="text-gray-400 font-[NeueMontreal,sans-serif] transition-none">Имя блогера</p>
+          <h3 class="text-4xl font-[NeueMontreal,sans-serif] transition-none">{{ carouselItem.name }}</h3>
+          <p class="text-gray-400 mt-4 font-[NeueMontreal,sans-serif] transition-none">Никнейм в соцсетях</p>
+          <p class="text-[18px] font-[NeueMontreal,sans-serif] transition-none">{{ carouselItem.nickname }}</p>
+          <p class="text-gray-400 mt-4 font-[NeueMontreal,sans-serif] transition-none">Цитата ©</p>
+          <p class="text-[18px] italic font-[NeueMontrealSemiBoldItalic,sans-serif] transition-none">
+            « {{ carouselItem.quote }}.»
+          </p>
           <button
-            class="mt-5 py-3 px-5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-300"
+            class="mt-5 py-3 w-full sm:w-auto px-5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white/80 hover:bg-white/20 hover:text-white font-[NeueMontreal,sans-serif] transition-none"
           >
             Узнать больше
           </button>
@@ -59,7 +68,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { computed, reactive } from 'vue';
+import { computed } from 'vue';
 import { useCarouselStore } from '~/stores/carousel.store.ts';
 import type { ICarouselItem } from '~/types/carousel';
 
@@ -71,65 +80,10 @@ interface IProps {
 defineProps<IProps>();
 
 const carouselStore = useCarouselStore();
-const { handleCardClick } = carouselStore;
-const { currentIndex, itemsCarousel } = storeToRefs(carouselStore);
+const { handleCardClick, isCardActive } = carouselStore;
+const { currentIndex, itemsCarousel, settingsCarousel, isMobile, isTablet } = storeToRefs(carouselStore);
 
-const settingsCarousel = reactive({
-  0: {
-    transform: 'translateX(-142%) translateY(-16%) scale(0.7)',
-    opacity: 0.4,
-    rotate: '-11deg',
-    zIndex: 20,
-    filter: 'blur(5px)',
-    left: '50%',
-    pointerEvents: 'none',
-  },
-  1: {
-    transform: `translateX(-108%)  translateY(-10%) scale(0.8)`,
-    opacity: 0.5,
-    zIndex: 30,
-    rotate: '-7deg',
-    filter: 'blur(1px)',
-    left: '50%',
-    pointerEvents: 'none',
-  },
-  2: {
-    transform: `translateX(-50%) scale(1)`,
-    opacity: 1,
-    zIndex: 50,
-    filter: 'blur(0px)',
-    left: '50%',
-    pointerEvents: 'auto',
-  },
-  3: {
-    transform: 'translateX(10%) translateY(0%) scale(0.8)',
-    opacity: 0.5,
-    rotate: '7deg',
-    zIndex: 30,
-    filter: 'blur(1px)',
-    left: '50%',
-    pointerEvents: 'none',
-  },
-  4: {
-    transform: 'translateX(45%) translateY(0%) scale(0.7)',
-    opacity: 0.4,
-    zIndex: 20,
-    rotate: '11deg',
-    filter: 'blur(5px)',
-    left: '50%',
-    pointerEvents: 'none',
-  },
-  5: {
-    // transform: 'translateX(-170%) translateY(-20%) scale(0.6)',
-    opacity: 0,
-    rotate: '-15deg',
-    zIndex: 10,
-    filter: 'blur(7px)',
-    left: '50%',
-    pointerEvents: 'none',
-  },
-});
-
+// Функция для получения стиля карточки в зависимости от её индекса
 const getCardStyle = computed(() => {
   return (index: number) => {
     let diff = index - currentIndex.value;
@@ -139,23 +93,50 @@ const getCardStyle = computed(() => {
     if (diff > Math.floor(total / 2) + 1) diff -= total;
     if (diff < -Math.floor(total / 2) + 1) diff += total;
 
+    // Настройки для мобильной версии
+    if (isMobile.value) {
+      if (diff === 0) {
+        return { ...settingsCarousel.value[1], transform: `translateX(-108%)  translateY(-5%) scale(0.8)` };
+      } else if (Math.abs(diff) === 1) {
+        if (diff == -1) return settingsCarousel.value[5];
+        return settingsCarousel.value[2];
+      } else if (Math.abs(diff) === 2) {
+        if (diff == -2) return settingsCarousel.value[5];
+        return settingsCarousel.value[3];
+      } else {
+        return settingsCarousel.value[5];
+      }
+    }
+    // Настройки для планшетной версии
+    if (isTablet.value) {
+      if (diff === 0) {
+        return settingsCarousel.value[1];
+      } else if (Math.abs(diff) === 1) {
+        if (diff == -1) return settingsCarousel.value[5];
+        return settingsCarousel.value[2];
+      } else if (Math.abs(diff) === 2) {
+        if (diff == -2) return settingsCarousel.value[5];
+        return settingsCarousel.value[3];
+      } else {
+        return settingsCarousel.value[5];
+      }
+    }
+    // Настройки для десктопной версии
     if (diff === 0) {
-      return settingsCarousel[0];
+      return settingsCarousel.value[0];
     } else if (Math.abs(diff) === 1) {
-      if (diff == -1) return settingsCarousel[5];
-      return settingsCarousel[1];
+      if (diff == -1) return settingsCarousel.value[5];
+      return settingsCarousel.value[1];
     } else if (Math.abs(diff) === 2) {
-      if (diff == -2) return settingsCarousel[5];
-      return settingsCarousel[2];
+      if (diff == -2) return settingsCarousel.value[5];
+      return settingsCarousel.value[2];
     } else if (Math.abs(diff) === 3) {
-      if (diff == -3) return settingsCarousel[5];
-      return settingsCarousel[3];
+      if (diff == -3) return settingsCarousel.value[5];
+      return settingsCarousel.value[3];
     } else if (Math.abs(diff) === 4) {
-      // if (diff == -4) return settingsCarousel[5];
-      return settingsCarousel[4];
+      return settingsCarousel.value[4];
     } else {
-      console.log(diff);
-      return settingsCarousel[5];
+      return settingsCarousel.value[5];
     }
   };
 });
@@ -165,18 +146,5 @@ const getCardStyle = computed(() => {
 .cardWrapper {
   backdrop-filter: blur(10px);
   border: 1px solid rgb(255, 255, 255, 0.2);
-}
-.badge {
-  position: relative;
-  background: #101010;
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -6px; /* толщина подсветки */
-    border-radius: inherit;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 60%);
-    filter: blur(4px); /* мягкое размытие */
-    z-index: -1;
-  }
 }
 </style>

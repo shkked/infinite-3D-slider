@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'NeueMontreal';
+  src: url('/assets/fonts/NeueMontreal/NeueMontreal-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NeueMontreal SemiBold Italic';
+  src: url('/assets/fonts/NeueMontreal/NeueMontreal-BoldItalic.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
