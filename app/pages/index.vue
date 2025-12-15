@@ -1,15 +1,15 @@
 <template>
 	<div>
-		<carouselBloger :dataCard="dataCard" />
+		<carousel3D :dataCard="dataCard" />
 	</div>
 </template>
 
 <script setup lang="ts">
-import type { ICardItem } from "~/types/card.ts"
+import type { ICarouselItem } from "~/types/card.ts"
 
 import { ref } from "vue"
 
-const dataCard = ref<ICardItem[]>([
+const dataCard = ref<ICarouselItem[]>([
 	{
 		id: 1,
 		name: "Василий Вакуленко",
@@ -26,7 +26,7 @@ const dataCard = ref<ICardItem[]>([
 		id: 2,
 		name: "Федор Инсаров",
 		nickname: "@feduk",
-		quote: "Хлопья летят наверх",
+		quote: "Хлопья летят наверх, всюду магия и свет",
 		imageURL: "feduk.png",
 		links: {
 			vk: "https://vk.com/feduk",
@@ -37,11 +37,11 @@ const dataCard = ref<ICardItem[]>([
 	{
 		id: 3,
 		name: "Михаил Смирнов",
-		nickname: "@marteen",
-		quote: "Просто мартин",
+		nickname: "@marteenmarteen",
+		quote: "Быть с тобой – это самый лучший сон",
 		imageURL: "martin.png",
 		links: {
-			vk: "https://vk.com/marteen",
+			vk: "https://vk.com/marteenmarteen",
 			telegram: "https://t.me/semechkiotmartina",
 			rutube: "https://rutube.ru/channel/marteen/",
 		},
@@ -62,12 +62,12 @@ const dataCard = ref<ICardItem[]>([
 		id: 5,
 		name: "Евгений Трофимов",
 		nickname: "Женя Трофимов",
-		quote: "Просто мартин",
+		quote: "Я с тобой спорить не хочу, Чтобы спор проиграть дважды",
 		imageURL: "trofimov.png",
 		links: {
-			vk: "https://vk.com/marteen",
-			telegram: "https://t.me/semechkiotmartina",
-			rutube: "https://rutube.ru/channel/marteen/",
+			vk: "https://vk.com/trofimov",
+			telegram: "https://t.me/trofimov",
+			rutube: "https://rutube.ru/channel/trofimov/",
 		},
 	},
 ])

@@ -1,4 +1,4 @@
-export interface ICardItem {
+export interface ICarouselItem {
 	id: number
 	name: string
 	nickname: string
