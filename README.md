@@ -1,75 +1,83 @@
-# Nuxt Minimal Starter
+# 3D Infinite Carousel
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Завершённый проект на **Nuxt 4** с использованием **TypeScript** и **Tailwind CSS**.
 
-## Setup
+Проект представляет собой бесконечную 3D‑карусель с плавными анимациями, аппаратным ускорением и адаптивной версткой.
 
-Make sure to install dependencies:
+---
+
+## 🚀 Технологии
+
+- Nuxt 4
+- TypeScript
+- Tailwind CSS
+- Composition API
+- CSS 3D Transforms
+
+---
+
+## ✨ Возможности
+
+- 🔄 Бесконечная прокрутка (infinite loop)
+- 🎯 Плавные 3D‑анимации
+- ⚡ Аппаратное ускорение (GPU)
+- 📱 Адаптивный дизайн
+- 🧩 Чистая компонентная архитектура
+- 🛠 Полная типизация (TypeScript)
+
+---
+
+## 📦 Установка
+
+Установите зависимости:
 
 ```bash
-# npm
 npm install
+```
 
-# pnpm
+или
+
+```bash
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+---
 
-Start the development server on `http://localhost:3000`:
+## 💻 Запуск в режиме разработки
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+После запуска приложение будет доступно по адресу:
 
-Build the application for production:
+```
+http://localhost:3000
+```
+
+---
+
+## 🏗 Сборка для production
 
 ```bash
-# npm
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
-Locally preview production build:
+Предпросмотр production‑сборки:
 
 ```bash
-# npm
 npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+---
+
+## 🧠 Архитектура
+
+Карусель построена на:
+
+- вычислении углов поворота для элементов
+- использовании `transform: rotateY()` и `translateZ()`
+- управлении активным индексом через реактивное состояние
+- циклическом смещении элементов для создания бесконечного эффекта
+
+Анимации реализованы через CSS‑transition.
